@@ -1,6 +1,9 @@
 let userAge;
 let userFirstName;
 let userSecondName;
+userAge = 50;
+userFirstName = 'Nataly';
+userSecondName = 'Ivanov';
 
 
 let newUser;
@@ -11,6 +14,5 @@ let cursorCoordinates;
 
 
 let greetings = 'Hello, World!';
-userAge = 50;
 console.log(greetings);
 console.log('user Age:', userAge);
