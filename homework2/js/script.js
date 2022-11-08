@@ -16,3 +16,9 @@ let cursorCoordinates;
 let greetings = 'Hello, World!';
 console.log(greetings);
 console.log('user Age:', userAge);
+
+let admin;
+let name;
+name = 'Ivan';
+admin = name;
+alert(admin);
