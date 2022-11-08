@@ -22,3 +22,6 @@ let name;
 name = 'Ivan';
 admin = name;
 alert(admin);
+
+let ourPlanetName = 'Earth';
+console.log('Our planet name is', ourPlanetName);
