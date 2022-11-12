@@ -1,10 +1,10 @@
 /* //task1
 const a = 5;
 const b = 10;
-sum = a + b;
-subtraction = a - b;
-division = a / b;
-multiplication = a * b;
+const sum = a + b;
+const subtraction = a - b;
+const division = a / b;
+const multiplication = a * b;
 console.log(sum);
 console.log(subtraction);
 console.log(division);
@@ -38,6 +38,7 @@ if (number1 > number2){
 /* //task4
 const number1 = Number(prompt('Введите первое число'));
 const number2 = Number(prompt('Введите второе число'));
+let res;
 const operation = prompt('Введите действие, которое хотите выполнить');
 switch(operation) {
     case '+':
