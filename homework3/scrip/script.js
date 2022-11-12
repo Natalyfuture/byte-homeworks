@@ -33,6 +33,7 @@ if (number1 > number2){
     alert('Второе число больше первого');
 } else {
     alert('Числа равны');
+
 }
  */
 /* //task4
@@ -60,16 +61,17 @@ switch(operation) {
 } 
   */
 
-/* 
+
 //task5
 const visitorAge = Number(prompt('Введите ваш возраст'));
 if (visitorAge >= 18 && visitorAge <= 60){
     alert('Вход разрешен');
 } else if (visitorAge < 12 || visitorAge >80){
     alert('Вход запрещен');
-} else {const withParents = confirm('Вас сопровождает взрослый?');
+} else {
+    const withParents = confirm('Вас сопровождает взрослый?');
     if(withParents){
     alert('Вход разрешен');
 } else {
     alert('Вход запрещен');
-}}   */
+}}  
