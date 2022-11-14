@@ -77,3 +77,17 @@ function dayOfWeek(){
 
 }
 dayOfWeek(); */
+
+/* //task5
+function userData(){
+    const userName = prompt('What is your name?');
+    const userAge = Number(prompt('How old are you?'));
+    if (userAge > 30) {
+        alert('Greetings, ' + userName + '!');
+        return;
+    } else {
+        alert('Hello, ' + userName + '!');
+        return;
+    }
+};
+userData(); */
