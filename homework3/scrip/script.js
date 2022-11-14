@@ -36,11 +36,11 @@ if (number1 > number2){
 
 }
  */
-/* //task4
+//task4
 const number1 = Number(prompt('Введите первое число'));
 const number2 = Number(prompt('Введите второе число'));
 let res;
-const operation = prompt('Введите действие, которое хотите выполнить');
+const operation = prompt('Введите действие, которое хотите выполнить: "+", "-", "*", "/"');
 switch(operation) {
     case '+':
         res = number1 + number2;
@@ -59,10 +59,10 @@ switch(operation) {
         alert(res);
     break;
 } 
-  */
+ 
 
 
-//task5
+/* //task5
 const visitorAge = Number(prompt('Введите ваш возраст'));
 if (visitorAge >= 18 && visitorAge <= 60){
     alert('Вход разрешен');
@@ -74,4 +74,4 @@ if (visitorAge >= 18 && visitorAge <= 60){
     alert('Вход разрешен');
 } else {
     alert('Вход запрещен');
-}}  
+}}   */
