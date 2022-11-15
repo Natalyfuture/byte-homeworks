@@ -46,6 +46,7 @@ console.log('summa :', res);
 res = sum(12,5);
 console.log('summa :', res); */
 
+
 /* //task3
 function exponentiation(a, b = 2) {
     console.log('a**b', a**b);
@@ -71,12 +72,36 @@ function dayOfWeek(){
                         }else if (day === 7){
                             console.log('Today is Sunday');  
                             } else {
-                                console.log('There is no such day of the week')
+                                console.log('There is no such day of the week');
                                 }
-        
-
 }
-dayOfWeek(); */
+dayOfWeek();  */
+
+//task4(var2)
+function dayOfWeek(day){
+    switch (day) {
+        case 1: console.log("Today is Monday");
+        break;
+        case 2: console.log("Today is Tuesday");
+        break;
+        case 3: console.log("Today is Wednesday");
+        break;
+        case 4: console.log("Today is Thursday");
+        break;
+        case 5: console.log("Today is Friday");
+        break;
+        case 6: console.log("Today is Saturday");
+        break;
+        case 7: console.log("Today is Sunday");
+        break;
+        default: console.log("There is no such day of the week");
+
+    }
+}
+dayOfWeek(1);
+dayOfWeek(2);
+dayOfWeek(8);
+
 
 /* //task5
 function userData(){
@@ -90,4 +115,5 @@ function userData(){
         return;
     }
 };
-userData(); */
+userData();
+ */
