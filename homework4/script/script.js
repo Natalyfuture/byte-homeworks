@@ -76,7 +76,7 @@ function dayOfWeek(){
                                 }
 }
 dayOfWeek();  */
-
+/* 
 //task4(var2)
 function dayOfWeek(day){
     switch (day) {
@@ -100,7 +100,23 @@ function dayOfWeek(day){
 }
 dayOfWeek(1);
 dayOfWeek(2);
-dayOfWeek(8);
+dayOfWeek(8); */
+
+//task4(var3)
+function dayOfWeek(day){
+    switch (day) {
+        case 1: return "Today is Monday";
+        case 2: return "Today is Tuesday";
+        case 3: return "Today is Wednesday";
+        case 4: return "Today is Thursday";
+        case 5: return "Today is Friday";
+        case 6: return "Today is Saturday";
+        case 7: return "Today is Sunday";
+        default: return "There is no such day of the week";
+    }
+}
+
+console.log('summa:', dayOfWeek(1));
 
 
 /* //task5
