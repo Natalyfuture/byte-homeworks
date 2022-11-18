@@ -135,6 +135,25 @@ const displayNumbers = () => {
 displayNumbers(); */
 
 
-
+/* 
 //               TASK2
 
+const primeNumbers = (number1, number2) => {
+    for(let i = number1; i <= number2; i++){
+        let amount = 0;
+       
+            for(let j = i; j > 0; j--){
+                if(i % j === 0){
+                    amount++
+                }else{
+                    continue;
+                }
+            }
+            if(amount === 2){
+                console.log(i)
+        }
+    }
+}
+const number1 = Number(prompt('Enter number1'));
+const number2 = Number(prompt('Enter number2'));
+primeNumbers(number1, number2); */
