@@ -136,7 +136,7 @@ displayNumbers(); */
 
 
 
-
+/* 
 //               TASK2
 
 const primeNumbers = (number1, number2) => {
@@ -157,4 +157,110 @@ const primeNumbers = (number1, number2) => {
 }
 const number1 = Number(prompt('Enter number1'));
 const number2 = Number(prompt('Enter number2'));
-primeNumbers(number1, number2); 
+primeNumbers(number1, number2);  */
+
+
+//    TASK_3 (Var1)
+
+/* const LOGIN = 'ADMIN';
+const PASSWORD = '1q2w3e';
+let userLogin;
+let userPassword;
+let attempts;
+let authorSuccess = false;
+
+const authorUser = () =>{
+
+    attempts = 3;
+   
+    do {
+        if(attempts > 0){
+        alert('You have only ' +  attempts + 'attempts');
+        userLogin = prompt('Enter your login');
+        if (!userLogin) {
+            alert('Enter your login');
+            attempts--
+            continue;
+        }
+        
+
+        userPassword = prompt('Enter your password');
+        if (!userPassword) {
+            alert('Enter your password');
+            attempts--
+            continue;
+        }
+
+        if (userLogin === LOGIN && userPassword === PASSWORD) {
+            alert('WELCOME!');
+            authorSuccess = true;
+        } else {
+            alert('Your data are wrong.');
+            attempts--
+            continue;
+        }
+    }else {
+        alert('You do not have any attempts');
+        break;
+    }
+          
+    } while(!authorSuccess);
+}
+
+authorUser(); */
+
+
+
+//    TASK_3 (Var2 __WHILE)
+
+const LOGIN = 'ADMIN';
+const PASSWORD = '1q2w3e';
+let userLogin;
+let userPassword;
+let attempts;
+
+
+const authorUser = () =>{
+
+    attempts = 3;
+    while(attempts >= 0){
+
+        const authorization = 'You have only ' +  attempts + ' attempts';
+       
+
+        if (attempts === 0){
+            alert('You do not have any attempts');
+            break;
+        }
+
+        alert(authorization);
+
+        userLogin = prompt('Enter your login.');
+            if (!userLogin) {
+                alert('Your login is wrong.');
+                attempts--;
+                continue;
+        }
+
+        userPassword = prompt('Enter your password.');
+        if (!userPassword) {
+            alert('Your password is wrong.');
+            attempts--
+            continue;
+        }
+
+        if (userLogin !== LOGIN || userPassword !== PASSWORD) {
+            alert('Your datas are wrong.');
+            attempts--
+            continue;
+        } else {
+            alert( 'WELCOME!')
+            attempts = -1;
+            
+        }
+        
+    }
+   
+}
+
+authorUser();
