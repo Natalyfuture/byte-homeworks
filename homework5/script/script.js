@@ -139,9 +139,11 @@ displayNumbers(); */
 /* 
 //               TASK2
 
+let amountDivisors;
+
 const primeNumbers = (number1, number2) => {
     for(let i = number1; i <= number2; i++){
-        let amountDivisors = 0;
+        amountDivisors = 0;
        
             for(let j = i; j > 0; j--){
                 if(i % j === 0){
@@ -160,7 +162,7 @@ const number2 = Number(prompt('Enter number2'));
 primeNumbers(number1, number2);  */
 
 
-//    TASK_3 (Var1)
+//    TASK_3 (Var1: DO_WHILE)
 
 /* const LOGIN = 'ADMIN';
 const PASSWORD = '1q2w3e';
@@ -210,7 +212,7 @@ const authorUser = () =>{
 authorUser(); */
 
 
-
+/* 
 //    TASK_3 (Var2 __WHILE)
 
 const LOGIN = 'ADMIN';
@@ -250,7 +252,7 @@ const authorUser = () =>{
         }
 
         if (userLogin !== LOGIN || userPassword !== PASSWORD) {
-            alert('Your datas are wrong.');
+            alert('Your data are wrong.');
             attempts--
             continue;
         } else {
@@ -262,5 +264,51 @@ const authorUser = () =>{
     }
    
 }
+
+authorUser(); */
+
+
+
+//    TASK_3 (Var3: FOR)
+
+
+const LOGIN = 'ADMIN';
+const PASSWORD = '1q2w3e';
+let userLogin;
+let userPassword;
+
+const authorUser = () => {
+
+    for(let i = 3; i >= 0; i--){
+
+        if (i === 0) {
+            alert('You do not have any attempts');
+            break;
+        }
+
+
+        alert('You have only ' +  i + 'attempts');
+        userLogin = prompt('Enter your login');
+        if (!userLogin) {
+            alert('Your login is wrong.');
+            continue;
+        }
+
+    userPassword = prompt('Enter your password.');
+        if (!userPassword) {
+            alert('Your password is wrong.');
+            continue;
+        }
+
+        if (userLogin === LOGIN && userPassword === PASSWORD) {
+            alert( 'WELCOME!')
+            break;
+        } else {
+            alert('Your data are wrong.');
+            continue;
+        }
+    }
+}
+       
 
 authorUser();
