@@ -84,17 +84,17 @@ const getOccurrencesCount = (arr) => {
     }
 
     if(evenNumbers.length === 1){
-         return evenNumbers;
+         return evenNumbers[0];
     }else{
-         return oddNumbers;
+         return oddNumbers[0];
     }
     }
     
  }
 
- const res = findExcess([0, 1, 2]);
+ //const res = findExcess([0, 1, 2]);
  //const res = findExcess([1, 2, 3]);
  //const res = findExcess([2, 6, 8, 10, 3]);
  //const res = findExcess([0, 0, 3, 0, 0]); 
- //const res = findExcess([1, 1, 0, 1, 1]);
+ const res = findExcess([1, 1, 0, 1, 1]);
 console.log(res);
