@@ -2,11 +2,11 @@ const actionButton = document.querySelector("button");
 actionButton.addEventListener("click", library);
 
 const books = [
-    {id: 1, author: "Фиджеральд", name: "Великий Гетсби", isReading: false},
-    {id: 2, author: "Толстой", name: "Анна Каренина", isReading: false},
-    {id: 3, author: "Оруел", name: "1984", isReading: false},
-    {id: 4, author: "Сервантес", name: "Дон Кихот", isReading: false},
-    {id: 5, author: "Достоевский", name: "Преступление и наказание", isReading: false},
+    {id: 1, author: "Фиджеральд", name: "Великий Гетсби", isReading: false, amount: 1},
+    {id: 2, author: "Толстой", name: "Анна Каренина", isReading: false, amount: 2},
+    {id: 3, author: "Оруел", name: "1984", isReading: false, amount: 5},
+    {id: 4, author: "Сервантес", name: "Дон Кихот", isReading: false, amount: 3},
+    {id: 5, author: "Достоевский", name: "Преступление и наказание", isReading: false, amount: 1},
 ];
 
 function library() {
