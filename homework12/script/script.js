@@ -5,7 +5,7 @@ const button = document.getElementById('button');
 button.onmouseover = function(event) {
 
   let tooltipHtml = createTooltip(button, "example tooltip text");
-  
+
 }
 
 
@@ -35,8 +35,7 @@ const createTooltip = (btn, text) => {
 
 }
 
-   
-
+  
 button.onmouseout = function(e) {
   console.log("button.onmouseout");
   if (tooltipElem) {
