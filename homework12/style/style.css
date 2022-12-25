@@ -11,16 +11,18 @@
     border: 2px solid brown;
     background-color: dimgrey;
     border-radius: 10px;
-    margin: 150px 800px;
+    margin: 150px 400px;
     box-sizing: border-box;
     font-size: 34px;
+    color: brown;
 }
 
 .tooltip {
-    width: 150px;
-    height: 25px;
-    background-color: bisque;
+    width: 160px;
+    height: 30px;
+    background-color: rgb(166, 164, 161);
     border-radius: 10px;
     text-align: center;
+    position: absolute;
     
 }
