@@ -32,8 +32,9 @@ const productCards = (Name, Brand) => {
 
   return productCardsContainer;
 
-
 }
+
+
 const productsList = (arr) => {
   const list = document.createElement("ul");
 
