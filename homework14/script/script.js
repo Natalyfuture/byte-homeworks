@@ -27,12 +27,10 @@ const arraySelect = {
     
     let arrOptions = [];
     arrOptions = arraySelect.options;
-    console.log(arrOptions)
     
-
-
 const divContainer = document.getElementsByClassName('container');
 const form = document.createElement('form');
+form.setAttribute('id', 'form');
 
 const createInputContainer = () =>{
 
@@ -51,6 +49,11 @@ const createInputContainer = () =>{
     label.classList.add('input_label')
 
     inputContainer.append(label, input);
+    form.append(inputContainer);
+
+    const span = document.createElement('span');
+    span.classList.add('errorMessage');
+    inputContainer.append(span);
     form.append(inputContainer);
 
     return divContainer.innerHTML = form;
@@ -89,7 +92,6 @@ const createSelectContainer = () => {
 
     select.innerHTML = optionHTML;
   
-    
     label.classList.add('input_label')
 
     selectContainer.append(label, select);
@@ -109,6 +111,7 @@ button.setAttribute('type', 'submit');
 button.setAttribute('id', 'submit');
 button.innerText = 'ОТПРАВИТЬ';
 
-document.body.append(button);
-console.log(document)
+form.append(button)
+document.body.append(form);
+
 

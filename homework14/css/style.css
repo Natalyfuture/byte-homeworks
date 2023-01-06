@@ -1,10 +1,17 @@
-.input-container{
-    margin-bottom: 10px;
+.input-container, .select-container{
+    margin-bottom: 60px;
+
 }
+
+.input-container{
+    
+}
+
+
 
 .input_label{
     font-size: 30px;
-    margin-right: 5px;
+    margin: 0 5px 40px 0 ;
 }
 
 .input{
@@ -14,6 +21,7 @@
     font-weight: 400;
     font-size: 20px;
     box-sizing: border-box;
+    position: relative;
 }
 
 .input:focus{
@@ -21,11 +29,26 @@
     outline: none;
 }
 
+.input[data-invalid]{
+    border-color: #f00;
+}
+
+
+.errorMessage{
+    position: absolute;
+    top: 64px;
+    font-size: 30px;
+    left: 108px;
+    color: #f00;
+}
+
+
 .button{
     width: 350px;
     height: 50px;
     box-sizing: border-box;
     border: 1px solid black;
+    box-shadow: 10px 8px 8px rgba(0, 0, 0, .508);
     background-color: rgb(234, 222, 222);
     border-radius: 8px;
     font-size: 22px;
@@ -34,7 +57,5 @@
     cursor: pointer;
 }
 
-.button:disabled{
-    background-color: rgba(0, 0, 0, .308);
-    cursor: not-allowed;
-}
+
+
