@@ -2,15 +2,17 @@ const loginInput = document.getElementById('login');
 const select = document.getElementById('fruits');
 
 
-const validateForm = (login) => {
+const validateForm = (login, selected) => {
 
     let error = '';
+    selectError = ''
     let isFormValid = true;
 
     if(!login){
         isFormValid = false;
         error = 'Вы не ввели логин';
     }
+    
    return {
     isFormValid,
     error,
@@ -45,7 +47,7 @@ const handleInput = (event) => {
 }
 
 const handleSelectChange = (event) => {
-    
+
     const fruitChange = event.target;
     
 }
