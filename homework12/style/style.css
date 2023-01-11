@@ -1,3 +1,8 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
 .title{
     font-size: 50px;
     font-weight: 700;
@@ -11,18 +16,19 @@
     border: 2px solid brown;
     background-color: dimgrey;
     border-radius: 10px;
-    margin: 150px 400px;
+    margin: 300px 300px;
     box-sizing: border-box;
     font-size: 34px;
     color: brown;
 }
 
 .tooltip {
-    width: 160px;
+    width: 360px;
     height: 30px;
     background-color: rgb(166, 164, 161);
     border-radius: 10px;
     text-align: center;
     position: absolute;
+    font-size: 24px;
     
 }

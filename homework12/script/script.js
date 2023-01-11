@@ -22,7 +22,8 @@ const createTooltip = (btn, text) => {
 
     let coords = btn.getBoundingClientRect();
 
-    let left = coords.left + 32;
+    let left = coords.left - 70;
+    
     if (left < 0) left = 0; 
 
     let top = coords.top - tooltipElem.offsetHeight - 10;
