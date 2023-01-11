@@ -149,18 +149,8 @@ console.log(metches);
 //не менее 2 символов. Начало и конец обязательно разделены точкой
 //используйте метод test
 
-//Напишите регулярное выражаение, которое проверяет строку:
-//строка не должна содержать ничего кроме числовых символов
-//длина строка должна быть не менее 12, но можно и больше
-
-//Тестируйте свои регулярки тут: https://regex101.com
-
-
-
-
-
-const form = document.getElementById('form');
-const input = document.getElementsByClassName('input');
+/* const form = document.getElementById('form');
+const input =document.getElementById('input');
 
 const DOMEN_REGEX = /^([\wёa-я-]{2,}\.)+[\wёa-я-]{2,}$/i;
 
@@ -168,9 +158,8 @@ const DOMEN_REGEX = /^([\wёa-я-]{2,}\.)+[\wёa-я-]{2,}$/i;
 const handleDomen = (event) => {
   event.preventDefault();
 
-  const inputValue = input.value;
-  /* const{value} = input; */
-  console.log(inputValue)
+  const{value} = input;
+  console.log(value);
 
   const isDomen = DOMEN_REGEX.test(value);
   console.log(isDomen);
@@ -182,4 +171,30 @@ const handleDomen = (event) => {
     alert('Enter Valid Domain Name')
   }
 }
-form.addEventListener("submit", handleDomen);
+
+form.addEventListener('submit', handleDomen); */
+
+
+//Напишите регулярное выражаение, которое проверяет строку:
+//строка не должна содержать ничего кроме числовых символов
+//длина строка должна быть не менее 12, но можно и больше
+
+//Тестируйте свои регулярки тут: https://regex101.com
+const STRING_REGEX = /^[0-9]{12,}$/
+
+const checkString = () => {
+
+const currentString = prompt('Введите строку')
+const checkedString = STRING_REGEX.test(currentString);
+if(checkedString){
+  console.log('Вы ввели правильное значение');
+}else{
+  console.log('Вы ввели неверное значение');
+}
+}
+
+checkString();
+
+
+
+
