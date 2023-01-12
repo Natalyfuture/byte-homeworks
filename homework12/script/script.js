@@ -16,13 +16,16 @@ const createTooltip = (btn, text) => {
     tooltipElem = document.createElement('div');
     tooltipElem.className = 'tooltip';
     tooltipElem.innerHTML = `${text}`;
+   
 
     document.body.append(tooltipElem);
   
 
     let coords = btn.getBoundingClientRect();
 
-    let left = coords.left - 70;
+    let left = coords.left + coords.width / 2 - tooltipElem.clientWidth / 2
+    
+    console.log(tooltipElem.offsetHeight);
     
     if (left < 0) left = 0; 
 
