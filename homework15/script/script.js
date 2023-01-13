@@ -5,7 +5,7 @@
 //значение is_active, которое принадлежит первому объекту в массиве data. Переименуйте переменную в isActive.
 
 
-/* const response = {
+const response = {
   data: [
     {
       username: "samuel",
@@ -35,7 +35,7 @@
 };
 
 const {
-   meta:{ paging:{...restPaging}},
+   meta:{ paging:{total}},
     
 
     data: [
@@ -44,10 +44,8 @@ const {
 
 } = response;
 
-const paging = restPaging;
-
-console.log(`paging`, paging);
-console.log(`isActive`, isActive); */
+console.log(`total`, total);
+console.log(`isActive`, isActive);
 
 
                          //Задание 2
@@ -180,7 +178,7 @@ form.addEventListener('submit', handleDomen); */
 //длина строка должна быть не менее 12, но можно и больше
 
 //Тестируйте свои регулярки тут: https://regex101.com
-const STRING_REGEX = /^[0-9]{12,}$/
+/* const STRING_REGEX = /^[0-9]{12,}$/
 
 const checkString = () => {
 
@@ -195,6 +193,6 @@ if(checkedString){
 
 checkString();
 
-
+ */
 
 
