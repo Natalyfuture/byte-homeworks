@@ -92,14 +92,17 @@ const initializeClock = (id) => {
     
         if(t.time === 0){
             clearInterval(timeInterval);
-            
-         const stopTimer = ms => {
-            return new Promise(resolve => {
-                setTimeout(() => resolve())
-            }, ms)
-        }
 
-        stopTimer(6000).then(() => {
+         const stopTimer = (ms) => {
+            return new Promise(resolve => {
+                setTimeout(() => { 
+                    resolve()
+
+            }, ms)
+        })
+    }
+
+        stopTimer(30).then(() => {
             console.log("Timer end!");
         }) 
             
