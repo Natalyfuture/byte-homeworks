@@ -36,10 +36,10 @@ const formConfig = [
 
     const formData = new FormData(event.target);
     const data = {};
-    //console.log(formData.get('age'));
+    console.log(formData.get('age'));
 
     for(let pair of formData.entries()){
-        //console.log(pair)
+        console.log(pair)
         data[pair[0]] = pair[1];
     }
     console.log(data)
