@@ -132,15 +132,5 @@ const pauseTimer = () =>{
 }
  
 
-/* const stopTimer = (ms) => {
-    return new Promise(resolve => {
-        setTimeout(() => resolve())
-    }, ms)
-}
-
-stopTimer(30).then(() => {
-    console.log("Timer end!");
-}) */
-
 startBtn.addEventListener('click', startTimer);
 pauseBtn.addEventListener('click', pauseTimer);
