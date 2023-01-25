@@ -31,6 +31,13 @@ getPost()
 .then((res) => {
 renderPost(res)
 })
+.catch((err) =>{
+    if(err.status !== undefined){
+        if(err.status === 404){
+            alert('post do not find')
+        }
+    }
+})
 
 
  const renderPost = (post) => {
@@ -45,7 +52,6 @@ renderPost(res)
     
     divPost.setAttribute('class', 'postItem');
     buttonShow.setAttribute('class', 'button_show');
-    buttonShow.setAttribute('id', 'show');
 
     postTitle.innerText = element.title;
     postBody.innerText = element.body;
@@ -79,7 +85,7 @@ renderPost(res)
     .catch((err) =>{
         if(err.status !== undefined){
             if(err.status === 404){
-                alert('post do not find')
+                alert('comments do not find')
             }
         }
     })
@@ -111,7 +117,6 @@ const renderComments = (comments) => {
 
     const commentsWrapper = document.createElement('div');
     commentsWrapper.setAttribute('class', 'comments_wrapper');
-    commentsWrapper.setAttribute('id', 'comments_wrapper')
     
     comments.forEach((elem) => {
         const commentElem = document.createElement('p');
