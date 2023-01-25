@@ -44,6 +44,7 @@ renderPost(res)
 
     post.forEach(element => {
     const postId = element.id;
+    let text = 'SHOW COMMENTS';
     
     const divPost = document.createElement('div')
     const postTitle = document.createElement('h1');
@@ -55,40 +56,44 @@ renderPost(res)
 
     postTitle.innerText = element.title;
     postBody.innerText = element.body;
-    buttonShow.innerText = 'SHOW COMMENTS';
+    buttonShow.innerText = text;
 
     divPost.append(postTitle, postBody, buttonShow);
     postElem.append(divPost);
-   
-    let text = 'SHOW COMMENTS';
 
-     getComments(postId)
-    .then((comments) =>{
-    const divComments = renderComments(comments);
-    
-        divPost.append(postTitle, postBody, buttonShow, divComments);
-        postElem.append(divPost);
 
         buttonShow.addEventListener('click', ()=>{
-            if(text === 'SHOW COMMENTS'){
-                text = 'HIDDEN COMMENTS';
-                buttonShow.innerText = text;
-            }else{
-                text = 'SHOW COMMENTS';
-                buttonShow.innerText = text;
-            }
 
-            divComments.classList.toggle('comments_wrapper');
-            
+        
+                getComments(postId)
+                .then((comments) =>{
+
+                const divComments = renderComments(comments);
+                console.log(divComments)
+                
+                    if(text === 'SHOW COMMENTS'){
+                        text = 'HIDDEN COMMENTS';
+                        buttonShow.innerText = text;
+                        
+                        divComments.classList.toggle('comments_wrapper');
+                        divPost.append(postTitle, postBody, buttonShow, divComments);
+                        
+                    }else{
+                        text = 'SHOW COMMENTS';
+                        buttonShow.innerText = text;
+                     
+                        postElem.append(divPost);
+                    }
+                })
+                .catch((err) =>{
+                    if(err.status !== undefined){
+                        if(err.status === 404){
+                            alert('comments do not find')
+                        }
+                    }
+                })
+                    
         })
-    })
-    .catch((err) =>{
-        if(err.status !== undefined){
-            if(err.status === 404){
-                alert('comments do not find')
-            }
-        }
-    })
     
     });
 };
