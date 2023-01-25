@@ -69,7 +69,6 @@ renderPost(res)
                 .then((comments) =>{
 
                 const divComments = renderComments(comments);
-                console.log(divComments)
                 
                     if(text === 'SHOW COMMENTS'){
                         text = 'HIDDEN COMMENTS';
