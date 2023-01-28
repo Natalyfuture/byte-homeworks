@@ -29,18 +29,6 @@ const getPost = ()=>{
     })
 }
 
-getPost()
-.then((res) => {
-renderPost(res)
-})
-.catch((err) =>{
-    if(err.status !== undefined){
-        if(err.status === 404){
-            alert('post do not find')
-        }
-    }
-})
-
 
 const getComments = (postId) => {
     console.log(postId)
@@ -120,9 +108,8 @@ const handleComments = (postId, divPost, buttonShow) => {
 
  const renderPost = (post) => {
    
-    post.forEach(element => {
-    const postId = element.id;
-    
+    post.map((element) => {
+
     const divPost = document.createElement('div')
     const postTitle = document.createElement('h1');
     const postBody = document.createElement('p');
@@ -136,22 +123,33 @@ const handleComments = (postId, divPost, buttonShow) => {
     buttonShow.innerText = text;
 
     divPost.append(postTitle, postBody, buttonShow);
+    
     postElem.append(divPost);
 
+    const postId = element.id;
 
         buttonShow.addEventListener('click', () => {
             console.log(postId)
 
-            const res = handleComments(postId, divPost, buttonShow);
-
-            console.log(res)
+            handleComments(postId, divPost, buttonShow);
                 
         }) 
     
     });
+    
 };
 
-
+getPost()
+.then((res) => {
+renderPost(res)
+})
+.catch((err) =>{
+    if(err.status !== undefined){
+        if(err.status === 404){
+            alert('post do not find')
+        }
+    }
+})
 
 
 
