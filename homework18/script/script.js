@@ -10,8 +10,10 @@
 
 
 const containerPosts = document.getElementById('collectionPosts');
-const postElem = document.getElementById('postId');
+const postElem = document.getElementById('post_Id');
 const BASE_URL = 'https://jsonplaceholder.typicode.com/posts';
+
+let text = 'SHOW COMMENTS';
 
 const getPost = ()=>{
     return new Promise((resolve) =>{
@@ -40,66 +42,8 @@ renderPost(res)
 })
 
 
- const renderPost = (post) => {
-
-    post.forEach(element => {
-    const postId = element.id;
-    let text = 'SHOW COMMENTS';
-    
-    const divPost = document.createElement('div')
-    const postTitle = document.createElement('h1');
-    const postBody = document.createElement('p');
-    const buttonShow = document.createElement('button');
-    
-    divPost.setAttribute('class', 'postItem');
-    buttonShow.setAttribute('class', 'button_show');
-
-    postTitle.innerText = element.title;
-    postBody.innerText = element.body;
-    buttonShow.innerText = text;
-
-    divPost.append(postTitle, postBody, buttonShow);
-    postElem.append(divPost);
-
-
-        buttonShow.addEventListener('click', ()=>{
-
-        
-                getComments(postId)
-                .then((comments) =>{
-
-                const divComments = renderComments(comments);
-                
-                    if(text === 'SHOW COMMENTS'){
-                        text = 'HIDDEN COMMENTS';
-                        buttonShow.innerText = text;
-                        
-                        divComments.classList.toggle('comments_wrapper');
-                        divPost.append(postTitle, postBody, buttonShow, divComments);
-                        
-                    }else{
-                        text = 'SHOW COMMENTS';
-                        buttonShow.innerText = text;
-                     
-                        postElem.append(divPost);
-                    }
-                })
-                .catch((err) =>{
-                    if(err.status !== undefined){
-                        if(err.status === 404){
-                            alert('comments do not find')
-                        }
-                    }
-                })
-                    
-        })
-    
-    });
-};
-
-
-
 const getComments = (postId) => {
+    console.log(postId)
     return new Promise((resolve) =>{
 
         const getCommentsRequest = new XMLHttpRequest();
@@ -110,11 +54,13 @@ const getComments = (postId) => {
 
         getCommentsRequest.onload = () => {
             const{response: comments} = getCommentsRequest;
-           
+            console.log(comments)
             resolve(comments);
+            
         }
-       
+        
     })
+    
 }
 
 const renderComments = (comments) => {
@@ -134,6 +80,78 @@ const renderComments = (comments) => {
     return commentsWrapper;
 
 } 
+
+
+const handleComments = (postId, divPost, buttonShow) => {
+    
+    getComments(postId)
+    .then((comments) => {
+    const divComments = renderComments(comments);
+        if(text === 'SHOW COMMENTS'){
+            text = 'HIDDEN COMMENTS';
+            
+            console.log(divPost)
+            console.log(divComments)
+            buttonShow.innerText = text;
+            console.log(buttonShow)
+             
+            divPost.append(buttonShow, divComments);
+            console.log(divPost)
+           
+            
+        }else{
+            text = 'SHOW COMMENTS';
+            buttonShow.innerText = text;
+            
+            postElem.append(divPost);
+            
+        }
+    })
+    .catch((err) =>{
+        if(err.status !== undefined){
+            if(err.status === 404){
+                alert('comments do not find')
+            }
+        }
+    })
+    
+}
+
+
+ const renderPost = (post) => {
+   
+    post.forEach(element => {
+    const postId = element.id;
+    
+    const divPost = document.createElement('div')
+    const postTitle = document.createElement('h1');
+    const postBody = document.createElement('p');
+    const buttonShow = document.createElement('button');
+    
+    divPost.setAttribute('class', 'postItem');
+    buttonShow.setAttribute('class', 'button_show');
+
+    postTitle.innerText = element.title;
+    postBody.innerText = element.body;
+    buttonShow.innerText = text;
+
+    divPost.append(postTitle, postBody, buttonShow);
+    postElem.append(divPost);
+
+
+        buttonShow.addEventListener('click', () => {
+            console.log(postId)
+
+            const res = handleComments(postId, divPost, buttonShow);
+
+            console.log(res)
+                
+        }) 
+    
+    });
+};
+
+
 
 
 
