@@ -13,7 +13,7 @@ const containerPosts = document.getElementById('collectionPosts');
 const postElem = document.getElementById('post_Id');
 const BASE_URL = 'https://jsonplaceholder.typicode.com/posts';
 
-let text = 'SHOW COMMENTS';
+let text = 'SHOW COMMENTS'
 
 const getPost = ()=>{
     return new Promise((resolve) =>{
@@ -33,39 +33,37 @@ const getPost = ()=>{
 const getComments = (postId, event) => {
     console.log(postId)
 
-    const button_show = event.target;
-    const parent = event.target.parentNode;
-
         const getCommentsRequest = new XMLHttpRequest();
         getCommentsRequest.open('GET',`${BASE_URL}/${postId}/comments`);
         getCommentsRequest.responseType = "json";
         getCommentsRequest.send();
         
+        const button = event.target;
+        const parent = event.target.parentNode;
 
         getCommentsRequest.onload = () => {
             let comments = getCommentsRequest.response;
+            console.log(comments)
 
-            if (button_show.innerText === 'SHOW COMMENTS'){
-                button_show.innerText === 'HIDDEN COMMENTS'
+            if (button.innerText === 'SHOW COMMENTS'){
+                button.innerText = 'HIDE COMMENTS'
                 showComments(comments, parent)
-            }else if (button_show.innerText === 'HIDDEN COMMENTS'){
-                button_show.innerText === 'SHOW COMMENTS'
+            }else if (button.innerText === 'HIDE COMMENTS'){
+                button.innerText = 'SHOW COMMENTS'
                 hideComments(parent)
             }
 
-            console.log(comments)
-            return comments
         }
-        
+
+            
 }
 
 
-const showComments = (postId, event) => {
+const showComments = (comments, div) => {
     
     commentsWrapper = document.createElement('div');
-    /*  commentsWrapper.setAttribute('class', 'comments_wrapper'); */
      
-     resComments.forEach((elem) => {
+    comments.forEach((elem) => {
          const commentElem = document.createElement('p');
          commentElem.setAttribute('class', 'text_comments')
          commentElem.innerText = elem.body;
@@ -74,36 +72,15 @@ const showComments = (postId, event) => {
          
      }) 
  
-     return commentsWrapper;
+     div.append(commentsWrapper)
     
 }
 
-const hideComments = (divPost) => {
-    let comment = divPost.lastElementChild
+const hideComments = (div) => {
+    let comment = div.lastElementChild
     comment.remove()
   
 }
-
-
-const handleComments = (postId, divPost, buttonShow, event) => {
-    console.log(buttonShow)
-    
-   let resComments = getComments(postId, event)
-    console.log(resComments)
-   
-        if(text === 'SHOW COMMENTS'){
-
-            showComments(resComments, commentsWrapper);
-            
-       }else{ 
-
-            hideComments(divPost);
-            
-        }
-    
-    
-} 
-
 
  const renderPost = (post) => {
    
@@ -112,25 +89,25 @@ const handleComments = (postId, divPost, buttonShow, event) => {
     const divPost = document.createElement('div')
     const postTitle = document.createElement('h1');
     const postBody = document.createElement('p');
-    const buttonShow = document.createElement('button');
+    const button = document.createElement('button');
     
     divPost.setAttribute('class', 'postItem');
-    buttonShow.setAttribute('class', 'button_show');
+    button.setAttribute('class', 'button_show');
 
     postTitle.innerText = element.title;
     postBody.innerText = element.body;
-    buttonShow.innerText = text;
+    button.innerText = text;
 
-    divPost.append(postTitle, postBody, buttonShow);
+    divPost.append(postTitle, postBody, button);
     
     postElem.append(divPost);
 
     const postId = element.id;
 
-        buttonShow.addEventListener('click', (event) => {
+        button.addEventListener('click', (event) => {
             console.log(postId)
 
-            handleComments(postId, divPost, buttonShow, event);
+            getComments(postId, event)
                 
         }) 
     
