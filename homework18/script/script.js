@@ -30,9 +30,11 @@ const getPost = ()=>{
 }
 
 
-const getComments = (postId) => {
+const getComments = (postId, event) => {
     console.log(postId)
-    return new Promise((resolve) =>{
+
+    const button_show = event.target;
+    const parent = event.target.parentNode;
 
         const getCommentsRequest = new XMLHttpRequest();
         getCommentsRequest.open('GET',`${BASE_URL}/${postId}/comments`);
@@ -41,69 +43,66 @@ const getComments = (postId) => {
         
 
         getCommentsRequest.onload = () => {
-            const{response: comments} = getCommentsRequest;
-            console.log(comments)
-            resolve(comments);
-            
-        }
-        
-    })
-    
-}
+            let comments = getCommentsRequest.response;
 
-const renderComments = (comments) => {
-
-    const commentsWrapper = document.createElement('div');
-    commentsWrapper.setAttribute('class', 'comments_wrapper');
-    
-    comments.forEach((elem) => {
-        const commentElem = document.createElement('p');
-        commentElem.setAttribute('class', 'text_comments')
-        commentElem.innerText = elem.body;
-
-        commentsWrapper.append(commentElem);
-        
-    }) 
-
-    return commentsWrapper;
-
-} 
-
-
-const handleComments = (postId, divPost, buttonShow) => {
-    
-    getComments(postId)
-    .then((comments) => {
-    const divComments = renderComments(comments);
-        if(text === 'SHOW COMMENTS'){
-            text = 'HIDDEN COMMENTS';
-            
-            console.log(divPost)
-            console.log(divComments)
-            buttonShow.innerText = text;
-            console.log(buttonShow)
-             
-            divPost.append(buttonShow, divComments);
-            console.log(divPost)
-           
-            
-        }else{
-            text = 'SHOW COMMENTS';
-            buttonShow.innerText = text;
-            
-            postElem.append(divPost);
-            
-        }
-    })
-    .catch((err) =>{
-        if(err.status !== undefined){
-            if(err.status === 404){
-                alert('comments do not find')
+            if (button_show.innerText === 'SHOW COMMENTS'){
+                button_show.innerText === 'HIDDEN COMMENTS'
+                showComments(comments, parent)
+            }else if (button_show.innerText === 'HIDDEN COMMENTS'){
+                button_show.innerText === 'SHOW COMMENTS'
+                hideComments(parent)
             }
+
+            console.log(comments)
+            return comments
         }
-    })
+        
+}
+
+
+const showComments = (postId, event) => {
+    
+    commentsWrapper = document.createElement('div');
+    /*  commentsWrapper.setAttribute('class', 'comments_wrapper'); */
+     
+     resComments.forEach((elem) => {
+         const commentElem = document.createElement('p');
+         commentElem.setAttribute('class', 'text_comments')
+         commentElem.innerText = elem.body;
+ 
+         commentsWrapper.append(commentElem);
+         
+     }) 
+ 
+     return commentsWrapper;
     
 }
+
+const hideComments = (divPost) => {
+    let comment = divPost.lastElementChild
+    comment.remove()
+  
+}
+
+
+const handleComments = (postId, divPost, buttonShow, event) => {
+    console.log(buttonShow)
+    
+   let resComments = getComments(postId, event)
+    console.log(resComments)
+   
+        if(text === 'SHOW COMMENTS'){
+
+            showComments(resComments, commentsWrapper);
+            
+       }else{ 
+
+            hideComments(divPost);
+            
+        }
+    
+    
+} 
 
 
  const renderPost = (post) => {
@@ -128,10 +127,10 @@ const handleComments = (postId, divPost, buttonShow) => {
 
     const postId = element.id;
 
-        buttonShow.addEventListener('click', () => {
+        buttonShow.addEventListener('click', (event) => {
             console.log(postId)
 
-            handleComments(postId, divPost, buttonShow);
+            handleComments(postId, divPost, buttonShow, event);
                 
         }) 
     
