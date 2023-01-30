@@ -31,7 +31,6 @@ const getPost = ()=>{
 
 
 const getComments = (postId, event) => {
-    console.log(postId)
 
         const getCommentsRequest = new XMLHttpRequest();
         getCommentsRequest.open('GET',`${BASE_URL}/${postId}/comments`);
@@ -43,7 +42,6 @@ const getComments = (postId, event) => {
 
         getCommentsRequest.onload = () => {
             let comments = getCommentsRequest.response;
-            console.log(comments)
 
             if (button.innerText === 'SHOW COMMENTS'){
                 button.innerText = 'HIDE COMMENTS'
@@ -105,14 +103,11 @@ const hideComments = (div) => {
     const postId = element.id;
 
         button.addEventListener('click', (event) => {
-            console.log(postId)
 
             getComments(postId, event)
                 
         }) 
-    
     });
-    
 };
 
 getPost()
