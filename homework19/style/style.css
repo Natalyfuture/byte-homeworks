@@ -1,6 +1,5 @@
-.container{
+/* .container{
     margin: 0 auto;
-    /* text-align: center; */
 }
 
 .div_info{
@@ -12,4 +11,37 @@
 
 .image{
     width: 1080px;
+}  */
+#form{
+    display: flex;
+    margin-bottom: 100px;
+}
+/* 
+.container{
+    display: ;
+} */
+
+.input{
+    width: 350px;
+    height: 50px;
+    border: 2px solid rgb(146, 140, 140);
+    font-weight: 400;
+    font-size: 20px;
+    box-sizing: border-box;
+    margin-right: 30px;
+}
+
+.input:focus {
+    border: 2px solid rgb(3, 3, 3);
+}
+
+.button{
+    
+    width: 350px;
+    height: 50px;
+    border: 2px solid rgb(21, 21, 21);
+    background-color: rgb(215, 213, 213);
+    font-weight: 400;
+    font-size: 20px;
+    box-sizing: border-box;
 }

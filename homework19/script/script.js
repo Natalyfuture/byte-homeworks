@@ -9,7 +9,7 @@
 //название страны, которое вы получите из первого запроса.
 //Все запросы отправляйте методом GET. Обязательно используйте fetch и async await.
 
-
+/* 
 const container = document.getElementById('container');
 const country_URL = 'https://ipapi.co/json/ ';
 const country_flag_URL = 'https://restcountries.com/v2/name';
@@ -87,5 +87,11 @@ const getCountry = async () => {
     }
  
     renderCountry()
-    
+     */
+
+
+
+
+
+
 
