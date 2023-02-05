@@ -30,10 +30,11 @@ this.tariff = tariff;
 this.index = false;
 }
 
+const availableServices = ['coldWater', 'hotWater', 'gas', 'electricity']
+
 PublicService.prototype.addMeterReadings = function (indicatorName, consumptionVolume) {
 
-  if(indicatorName === "hotWater" || indicatorName === "coldWater" || indicatorName === "gas" 
-  || indicatorName === "electricity"){
+  if(availableServices.includes(indicatorName)){
     if(this.index === false){
   this.consumptionVolume = consumptionVolume;
   this.index = true;
@@ -44,6 +45,7 @@ PublicService.prototype.addMeterReadings = function (indicatorName, consumptionV
   throw new Error(`Service "${indicatorName}" is unavailable.`);
 }
 }
+
 
 
 PublicService.prototype.deleteMeterReadings = function (indicatorName){
