@@ -55,7 +55,7 @@ const BASE_URL = 'https://swapi.dev/api';
 
 const handlerRequestErrors = async(response) =>{
     if(!response.ok){
-        const error = await response.json();
+      const error = 'Not found'
         throw new Error(error);
     }
     return response;
