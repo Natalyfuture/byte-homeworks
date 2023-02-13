@@ -194,6 +194,11 @@ class Card {
         this.card.classList.add('card_content');
     
             entries.forEach(([key, value]) => {
+                if(key === 'name'){
+                    const h = document.createElement('h3')
+                    h.innerText = `${key}: ${value}`;
+                    this.card.append(h);
+                }
                 const p = document.createElement('p');
                 p.classList.add('text')
                 p.innerText = `${key}: ${value}`;
