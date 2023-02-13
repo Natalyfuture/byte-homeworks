@@ -35,7 +35,7 @@
 //возможное количество пассажиров (passengers)
 //Если неообходимого ресурса с переданным айди не существует, то должен быть показан alert с соответсвующим текстом.
 
-//Каждая карточка должна может быть удалена с доски. Для этого в ней должна присутствовать кнопка-крестик.
+//Каждая карточка  может быть удалена с доски. Для этого в ней должна присутствовать кнопка-крестик.
 
 //Обязательно должны быть реализованы следующие классы:
 
@@ -47,9 +47,85 @@
 //То есть, при повторном входе пользователь должен увидеть ту же доску с карточками, что и при последнем визите.
 
 const formContainer = document.getElementById('form-container');
+const cardContainer = document.getElementById('cards_container');
+const preloader = document.getElementById('preloader');
+const BASE_URL = 'https://swapi.dev/api';
 
-const BASE_URL = 'https://swapi.dev/api/';
 
+
+const handlerRequestErrors = async(response) =>{
+    if(!response.ok){
+        const error = await response.json();
+        throw new Error(error);
+    }
+    return response;
+}
+
+const showPreloader = (show) =>{
+    if(show){
+        preloader.style.display = 'block';
+    }else{
+        preloader.style.display = 'none';
+
+    }
+}
+showPreloader(true);
+
+const fetchChoice = async(input, select) =>{
+    
+    try{
+        const response = await handlerRequestErrors(
+          
+            await fetch(`${BASE_URL}/${select}/${input}`));
+
+            if(select === 'vehicles'){
+                const {name, cost_in_credits, crew, passenger} = await response.json();
+                return {
+                    name,
+                    cost_in_credits,
+                    crew,
+                    passenger,
+                }
+            }
+            if(select === 'planets'){
+                const{name, climate, terrain, population} = await response.json();
+                return{
+                    name,
+                    climate,
+                    terrain, 
+                    population,
+                }
+            }
+            if(select === 'starships'){
+                const{name, model, manufacturer, max_atmosphering_speed} = await response.json();
+                return{
+                    name,
+                    model,
+                    manufacturer,
+                    max_atmosphering_speed,
+                }
+            }
+    }catch(error){
+        alert(error.message)
+    }
+}
+
+const  handleFormSubmit = async (event) => {
+    event.preventDefault();
+    
+    const input = document.getElementById('input_id');
+    const select = document.getElementById('select');
+   
+    const { value: id} = input;
+    const {value: selectElem} = select;
+
+    const currenChoice =  await fetchChoice(id, selectElem);
+
+    const currentCard = new Card (currenChoice);
+    currentCard.show();
+
+    showPreloader(false);
+}  
 
 class Form {
     constructor (nameInput, arr){
@@ -63,14 +139,15 @@ class Form {
         
         if(this.nameInput === 'select'){
             const select = document.createElement('select');
+            select.setAttribute('id', 'select')
             select.classList.add('select');
                 
                 const optionHTML = this.arr
-                .map(elem => `<option>${elem}</option>`)
+                .map(elem =>`<option value=${ elem.toLowerCase()}>${elem}</option>`)
                 .join('');
                 select.innerHTML = optionHTML;
                 
-                return select
+                return select;
             }
            
         if (this.nameInput === 'input'){
@@ -79,54 +156,75 @@ class Form {
             inputId.classList.add('input');
             
             inputId.setAttribute('placeholder', 'Введите id')
+            inputId.setAttribute('id', 'input_id')
             
-            return inputId
+            return inputId;
         }
     }
+   
 }
 
 
 const renderForm =() =>{
+    
     const form = document.createElement('form');
     const button = document.createElement('button');
     button.setAttribute('type', 'submit');
     button.classList.add('button');
     button.innerText = 'Добавить';
 
-    const selectElem = new Form('select', ['Vehicle', 'Starship', 'Planet']);
+    const selectElem = new Form('select', ['Vehicles', 'Starships', 'Planets']);
     const input = new Form ('input');
 
     form.append(selectElem, input, button);
-    console.log(form)
     formContainer.append(form);
 
+    button.addEventListener('click', handleFormSubmit)
 }
 renderForm()
 
 
-const handlerRequestErrors = async(response) =>{
-    if(!response.ok){
-        const error = await response.json();
-        throw new Error(error);
+
+class Card {
+
+    constructor(options){
+        const entries = Object.entries(options);
+
+        this.card = document.createElement('div');
+        this.card.classList.add('card_content');
+    
+            entries.forEach(([key, value]) => {
+                const p = document.createElement('p');
+                p.classList.add('text')
+                p.innerText = `${key}: ${value}`;
+                this.card.append(p);
+            })
+        this.render()
     }
-    return response;
+
+    render(){
+        
+        this.checkbox = document.createElement('div');
+        this.checkbox.classList.add('div_checkbox');
+        this.checkboxElem = document.createElement('p')
+        this.checkboxElem.innerText = 'X';
+        this.checkbox.append(this.checkboxElem);
+        
+        this.card.append(this.checkbox);
+
+        this.checkboxElem.addEventListener('click', this.hide);
+    }
+
+    show(){
+        cardContainer.append(this.card);
+    }
+
+    hide(event){
+        const parent = event.target;
+        let currentCard = event.target.parentNode.parentNode;
+       
+        currentCard.remove();
+        showPreloader(true);
+    }
 }
 
-const fetchChoice = async(id, select) =>{
-    try{
-        const response = await handlerRequestErrors(
-            await fetch(`${BASE_URL}${select}${id}`));
-        const choice = await response.json();
-        console.log(choice)
-    }catch(error){
-        alert(error.message)
-    }
-}
-
-const handleFormSubmit = (event) => {
-    event.preventDefault();
-    const {value: select} = select;
-    const { value: input} = id;
-
-   /*  await input ({id}) */
-}  
