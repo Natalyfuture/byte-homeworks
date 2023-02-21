@@ -71,8 +71,6 @@ const showPreloader = (show) =>{
 }
 showPreloader(true);
 
-/* const updateLocalStorage = ()
- */
 const fetchChoice = async(input, select) =>{
     
     try{
@@ -237,4 +235,5 @@ class Card {
         showPreloader(true);
     }
 } 
+
 
