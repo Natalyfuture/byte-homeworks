@@ -71,6 +71,8 @@ const showPreloader = (show) =>{
 }
 showPreloader(true);
 
+/* const updateLocalStorage = ()
+ */
 const fetchChoice = async(input, select) =>{
     
     try{
@@ -111,6 +113,8 @@ const fetchChoice = async(input, select) =>{
 }
 
 const  handleFormSubmit = async (event) => {
+    showPreloader(true);
+    
     event.preventDefault();
     
     const input = document.getElementById('input_id');
@@ -122,6 +126,7 @@ const  handleFormSubmit = async (event) => {
     const currenChoice =  await fetchChoice(id, selectElem);
 
     const currentCard = new Card (currenChoice);
+
     currentCard.show();
 
     showPreloader(false);
@@ -231,5 +236,5 @@ class Card {
         currentCard.remove();
         showPreloader(true);
     }
-}
+} 
 
