@@ -78,33 +78,35 @@ const fetchChoice = async(input, select) =>{
           
             await fetch(`${BASE_URL}/${select}/${input}`));
 
-            if(select === 'vehicles'){
-                const {name, cost_in_credits, crew, passenger} = await response.json();
+          if(select === 'vehicles'){
+            const {name, cost_in_credits, crew, passenger} = await response.json();
                 return {
                     name,
                     cost_in_credits,
                     crew,
                     passenger,
                 }
-            }
-            if(select === 'planets'){
-                const{name, climate, terrain, population} = await response.json();
-                return{
+          }
+
+          if(select === 'planets'){
+            const {climate, terrain, population} = await response.json();
+                    return{
                     name,
                     climate,
                     terrain, 
                     population,
                 }
-            }
-            if(select === 'starships'){
-                const{name, model, manufacturer, max_atmosphering_speed} = await response.json();
+          }
+
+        if(select === 'starships'){
+             const{name, model, manufacturer, max_atmosphering_speed} = await response.json();
                 return{
                     name,
                     model,
                     manufacturer,
                     max_atmosphering_speed,
                 }
-            }
+        }
     }catch(error){
         alert(error.message)
     }
@@ -114,20 +116,40 @@ const  handleFormSubmit = async (event) => {
     showPreloader(true);
     
     event.preventDefault();
-    
-    const input = document.getElementById('input_id');
-    const select = document.getElementById('select');
+    console.log(localStorage)
+  /*   if(localStorage.length !== 0){
+       for(key in localStorage){
+        let id = key;
+        console.log(id)
+        let selectElem = localStorage.getItem(key);
+        console.log(selectElem)
+        const currenChoice =  await fetchChoice(id, selectElem);
+        const currentCard = new Card (currenChoice);
+        currentCard.show();
+       }
+    } */
+        const input = document.getElementById('input_id');
+        const select = document.getElementById('select');
+
+        const { value: id} = input;
+        const {value: selectElem} = select;
+        
+        
+
+        localStorage.setItem(id, selectElem);
+        
+
+        const currenChoice =  await fetchChoice(id, selectElem);
+        console.log('currenChoice', currenChoice)
+
+        const currentCard = new Card (currenChoice);
+
+        currentCard.show();
+
+        showPreloader(false);
    
-    const { value: id} = input;
-    const {value: selectElem} = select;
 
-    const currenChoice =  await fetchChoice(id, selectElem);
-
-    const currentCard = new Card (currenChoice);
-
-    currentCard.show();
-
-    showPreloader(false);
+    
 }  
 
 class Form {
@@ -186,12 +208,29 @@ const renderForm =() =>{
 }
 renderForm()
 
+const showInterface = async () => {
+    console.log(localStorage)
+    if(localStorage.length !== 0){
+       for(key in localStorage){
+        let id = key;
+        console.log(id)
+        let selectElem = localStorage.getItem(key);
+        console.log(selectElem)
+        const currenChoice =  await fetchChoice(id, selectElem);
+        const currentCard = new Card (currenChoice);
+        currentCard.show();
+       }
+    } 
+}
+showInterface()
+
 
 
 class Card {
 
     constructor(options){
         const entries = Object.entries(options);
+        console.log(entries)
 
         this.card = document.createElement('div');
         this.card.classList.add('card_content');
@@ -199,13 +238,17 @@ class Card {
             entries.forEach(([key, value]) => {
                 if(key === 'name'){
                     const h = document.createElement('h3')
-                    h.innerText = `${key}: ${value}`;
+                    h.innerText = `${key}:${value}`;
+                    console.log(`${key}: ${value}`)
                     this.card.append(h);
+                }else{
+                     const p = document.createElement('p');
+                    p.classList.add('text')
+                    p.innerText = `${key}: ${value}`;
+                    console.log(`${key}: ${value}`)
+                    this.card.append(p);
                 }
-                const p = document.createElement('p');
-                p.classList.add('text')
-                p.innerText = `${key}: ${value}`;
-                this.card.append(p);
+               
             })
         this.render()
     }
@@ -225,13 +268,17 @@ class Card {
 
     show(){
         cardContainer.append(this.card);
+        console.log(this.card)
+        
     }
 
     hide(event){
         const parent = event.target;
         let currentCard = event.target.parentNode.parentNode;
+        console.log(currentCard)
        
         currentCard.remove();
+        localStorage.removeItem()
         showPreloader(true);
     }
 } 
