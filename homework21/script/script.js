@@ -72,7 +72,7 @@ const showPreloader = (show) =>{
 showPreloader(true);
 
 const fetchChoice = async(input, select) =>{
-    
+    console.log(input)
     try{
         const response = await handlerRequestErrors(
           
@@ -80,7 +80,9 @@ const fetchChoice = async(input, select) =>{
 
           if(select === 'vehicles'){
             const {name, cost_in_credits, crew, passenger} = await response.json();
+            
                 return {
+                    id: input,
                     name,
                     cost_in_credits,
                     crew,
@@ -89,8 +91,9 @@ const fetchChoice = async(input, select) =>{
           }
 
           if(select === 'planets'){
-            const {climate, terrain, population} = await response.json();
+            const {name, climate, terrain, population} = await response.json();
                     return{
+                    id: input,
                     name,
                     climate,
                     terrain, 
@@ -101,6 +104,7 @@ const fetchChoice = async(input, select) =>{
         if(select === 'starships'){
              const{name, model, manufacturer, max_atmosphering_speed} = await response.json();
                 return{
+                    id: input,
                     name,
                     model,
                     manufacturer,
@@ -117,38 +121,26 @@ const  handleFormSubmit = async (event) => {
     
     event.preventDefault();
     console.log(localStorage)
-  /*   if(localStorage.length !== 0){
-       for(key in localStorage){
-        let id = key;
-        console.log(id)
-        let selectElem = localStorage.getItem(key);
-        console.log(selectElem)
-        const currenChoice =  await fetchChoice(id, selectElem);
-        const currentCard = new Card (currenChoice);
-        currentCard.show();
-       }
-    } */
+  
         const input = document.getElementById('input_id');
         const select = document.getElementById('select');
 
         const { value: id} = input;
         const {value: selectElem} = select;
         
-        
-
-        localStorage.setItem(id, selectElem);
-        
 
         const currenChoice =  await fetchChoice(id, selectElem);
+        
+        if(currenChoice !== undefined){
+            localStorage.setItem(id, selectElem);
+        }
+        
+       
         console.log('currenChoice', currenChoice)
 
         const currentCard = new Card (currenChoice);
-
-        currentCard.show();
-
         showPreloader(false);
-   
-
+        currentCard.show();
     
 }  
 
@@ -210,7 +202,7 @@ renderForm()
 
 const showInterface = async () => {
     console.log(localStorage)
-    if(localStorage.length !== 0){
+    if(localStorage !== null){
        for(key in localStorage){
         let id = key;
         console.log(id)
@@ -221,6 +213,7 @@ const showInterface = async () => {
         currentCard.show();
        }
     } 
+    
 }
 showInterface()
 
@@ -229,26 +222,31 @@ showInterface()
 class Card {
 
     constructor(options){
+        console.log(options)
         const entries = Object.entries(options);
         console.log(entries)
 
         this.card = document.createElement('div');
         this.card.classList.add('card_content');
+        this.arrId = [];
     
             entries.forEach(([key, value]) => {
-                if(key === 'name'){
-                    const h = document.createElement('h3')
-                    h.innerText = `${key}:${value}`;
-                    console.log(`${key}: ${value}`)
-                    this.card.append(h);
-                }else{
-                     const p = document.createElement('p');
-                    p.classList.add('text')
-                    p.innerText = `${key}: ${value}`;
-                    console.log(`${key}: ${value}`)
-                    this.card.append(p);
+                
+                     if(key === 'id'){
+                        this.arrId.push(Number(value));
+                     }else if(key === "name"){
+                        const h = document.createElement('h3')
+                        h.innerText = `${key}:${value}`;
+                        console.log(`${key}: ${value}`)
+                        this.card.append(h);
+                    }else if(key !== "id"){
+                         const p = document.createElement('p');
+                        p.classList.add('text')
+                        p.innerText = `${key}: ${value}`;
+                        console.log(`${key}: ${value}`)
+                        this.card.append(p);
                 }
-               
+            
             })
         this.render()
     }
@@ -263,7 +261,14 @@ class Card {
         
         this.card.append(this.checkbox);
 
-        this.checkboxElem.addEventListener('click', this.hide);
+        console.log(this.arrId)
+            this.checkboxElem.addEventListener('click', (e, key) =>{
+                key = this.arrId;
+                console.log(this.arrId)
+                this.hide(e);
+                 localStorage.removeItem(this.arrId)
+            } )
+        
     }
 
     show(){
@@ -274,12 +279,14 @@ class Card {
 
     hide(event){
         const parent = event.target;
+        console.log(parent)
+
         let currentCard = event.target.parentNode.parentNode;
         console.log(currentCard)
+        
        
         currentCard.remove();
-        localStorage.removeItem()
-        showPreloader(true);
+        /* showPreloader(true); */
     }
 } 
 
