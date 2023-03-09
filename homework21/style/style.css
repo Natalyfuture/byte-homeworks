@@ -1,11 +1,13 @@
 body{
     font-family: sans-serif;
+    font-size: 18px;
 }
 
 
 .form-container{
     padding: 15px 50px;
     border-bottom: 2px solid rgb(151, 144, 144);
+    height: 30px;
 }
 
 .select{
@@ -28,7 +30,15 @@ body{
     border-radius: 6px;
     font-size: 18px;
     margin-left: 15px;
+    border: 1px solid;
+    background-color: transparent;
+    cursor: pointer;
     
+}
+
+.button:hover{
+  background-color: rgb(230, 221, 221);
+  border: 2px solid black;
 }
 
 .cards_container{

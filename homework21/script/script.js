@@ -72,7 +72,7 @@ const showPreloader = (show) =>{
 showPreloader(true);
 
 const fetchChoice = async(input, select) =>{
-    console.log(input)
+    
     try{
         const response = await handlerRequestErrors(
           
@@ -121,26 +121,26 @@ const  handleFormSubmit = async (event) => {
     
     event.preventDefault();
     console.log(localStorage)
-  
+
         const input = document.getElementById('input_id');
         const select = document.getElementById('select');
 
         const { value: id} = input;
         const {value: selectElem} = select;
-        
 
-        const currenChoice =  await fetchChoice(id, selectElem);
-        
-        if(currenChoice !== undefined){
-            localStorage.setItem(id, selectElem);
-        }
-        
+        console.log(id)
        
-        console.log('currenChoice', currenChoice)
-
-        const currentCard = new Card (currenChoice);
-        showPreloader(false);
-        currentCard.show();
+        if(id !== ''){
+            const currenChoice =  await fetchChoice(id, selectElem);
+            console.log(currenChoice)
+            if(currenChoice !== undefined){
+                localStorage.setItem(id, selectElem);
+                const currentCard = new Card (currenChoice);
+            showPreloader(false);
+            currentCard.show();
+            
+            }
+        }   
     
 }  
 
@@ -201,18 +201,22 @@ const renderForm =() =>{
 renderForm()
 
 const showInterface = async () => {
-    console.log(localStorage)
+    
     if(localStorage !== null){
        for(key in localStorage){
-        let id = key;
-        console.log(id)
-        let selectElem = localStorage.getItem(key);
-        console.log(selectElem)
-        const currenChoice =  await fetchChoice(id, selectElem);
-        const currentCard = new Card (currenChoice);
-        currentCard.show();
+            let id = key;
+            let selectElem = localStorage.getItem(key);
+            console.log(selectElem)
+            if(selectElem !== null){
+                const currenChoice =  await fetchChoice(id, selectElem);
+                const currentCard = new Card (currenChoice);
+                currentCard.show();
+            }
        }
-    } 
+    } else{
+       
+        button.addEventListener('click', handleFormSubmit)
+    }
     
 }
 showInterface()
@@ -222,18 +226,18 @@ showInterface()
 class Card {
 
     constructor(options){
-        console.log(options)
         const entries = Object.entries(options);
-        console.log(entries)
+        console.log('entries', entries[0][1])
 
         this.card = document.createElement('div');
         this.card.classList.add('card_content');
-        this.arrId = [];
-    
-            entries.forEach(([key, value]) => {
+
+       
+
+            entries.forEach(([key, value], index) => {
                 
-                     if(key === 'id'){
-                        this.arrId.push(Number(value));
+                     if(key === 'id' && key !== null){
+                        this.arrId = value;
                      }else if(key === "name"){
                         const h = document.createElement('h3')
                         h.innerText = `${key}:${value}`;
@@ -264,7 +268,6 @@ class Card {
         console.log(this.arrId)
             this.checkboxElem.addEventListener('click', (e, key) =>{
                 key = this.arrId;
-                console.log(this.arrId)
                 this.hide(e);
                  localStorage.removeItem(this.arrId)
             } )
@@ -273,21 +276,20 @@ class Card {
 
     show(){
         cardContainer.append(this.card);
-        console.log(this.card)
-        
+        showPreloader(false);
     }
 
     hide(event){
         const parent = event.target;
-        console.log(parent)
 
         let currentCard = event.target.parentNode.parentNode;
-        console.log(currentCard)
         
-       
         currentCard.remove();
-        /* showPreloader(true); */
+        showPreloader(true);
     }
 } 
+
+
+
 
 
